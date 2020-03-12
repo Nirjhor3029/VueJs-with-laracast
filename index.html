@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .color-red {
+            color: red;
+        }
+
+        .color-blue {
+            color: blue;
+        }
+
+        .is-loading {
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root">
+        <input type="text" id="input" v-model="message">
+
+        <p>I Write that, " {{message}} "</p>
+
+        <ul>
+            <li v-for="(name, index) in names" :key="index"> {{index}} {{name}}</li>
+        </ul>
+
+        <input type="text" id="name" v-model="newName">
+
+
+        <!-- <input type="button" value="Add Name" v-on:click="addName"> -->
+        <input type="button" value="Add Name" @click="addName">
+
+
+
+        <br><br><br>
+        <!-- <input type="button" value="Hover Over Me" v-bind:title="title"> -->
+        <input type="button" value="Hover Over Me" :title="title">
+
+        <br><br><br>
+
+        <button :class="className" @click="changeClass">Hello World !</button>
+
+        <button :class="{'is-loading': isLoding }" @click="toggleClass">Toggole Me</button>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+
+    <script>
+        let data = {
+            message: "Hello Wolrd",
+            names: ['Nirjhor', 'Rana', 'Nijhum', 'Rusty'],
+            newName: "",
+            title: "THis is a title by Vue JS",
+            className: "color-red",
+            isLoding: false
+        }
+
+        let app = new Vue({
+            el: '#root',
+            data: data,
+            mounted() {
+                // alert("its auto call after vue instance ready to go");
+            },
+            methods: {
+                addName() {
+                    // alert("Adding Name");
+                    this.names.push(this.newName);
+                    this.newName = "";
+                },
+                changeClass() {
+                    this.className = "color-blue";
+                },
+                toggleClass() {
+                    this.isLoding = !this.isLoding;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

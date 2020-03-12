@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div id="root">
+        <div class="row container-fluid">
+            <div class="com-md-4">
+                <div class="card">
+                    <div class="card-header">All tasks</div>
+                    <div class="card-body">
+                        <ul>
+                            <li v-for="(task, index) in allTasks" :key="index">
+                                <input type="checkbox" name="" id="" :checked="task.completed"
+                                    @change="makeChecked(index)">
+                                {{task.description}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="com-md-4">
+                <div class="card">
+                    <div class="card-header">Completed tasks only</div>
+                    <div class="card-body">
+                        <ul>
+                            <li v-for="(task, index) in completedTasks" :key="index">
+                                {{task.description}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="com-md-4">
+                <div class="card">
+                    <div class="card-header">InCompleted tasks only</div>
+                    <div class="card-body">
+                        <ul>
+                            <li v-for="(task, index) in unCompletedTasks" :key="index">
+                                {{task.description}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+
+    <script>
+        let data = {
+            message: "Hello World",
+            allTasks: [{
+                    description: 'Go to Store',
+                    completed: false
+                },
+                {
+                    description: 'Learn Vue JS',
+                    completed: true
+                },
+                {
+                    description: 'JS Built in methods',
+                    completed: false
+                },
+                {
+                    description: 'ES6 new features',
+                    completed: false
+                },
+                {
+                    description: 'ES6 new built in methods',
+                    completed: false
+                },
+                {
+                    description: 'Laravel Documentation',
+                    completed: false
+                },
+                {
+                    description: 'React JS',
+                    completed: false
+                },
+                {
+                    description: 'React Native',
+                    completed: false
+                },
+                {
+                    description: 'Php oop',
+                    completed: true
+                },
+                {
+                    description: 'JS oop',
+                    completed: true
+                },
+                {
+                    description: 'MySql',
+                    completed: true
+                },
+                {
+                    description: 'Database relations',
+                    completed: true
+                },
+                {
+                    description: 'Wordpress',
+                    completed: true
+                },
+            ],
+        };
+        let app = new Vue({
+            el: "#root",
+            data: data,
+            methods: {
+                makeChecked(index) {
+                    // alert(index);
+                    this.allTasks[index].completed = !this.allTasks[index].completed;
+                },
+            },
+            computed: {
+                completedTasks() {
+                    return this.allTasks.filter(task => task.completed)
+                },
+                unCompletedTasks() {
+                    return this.allTasks.filter(task => !task.completed)
+                }
+            },
+
+
+        })
+    </script>
+</body>
+
+</html>
